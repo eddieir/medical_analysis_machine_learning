@@ -9,14 +9,10 @@ from sklearn.neural_network import MLPClassifier
 from sklearn import svm
 from sklearn.cluster import KMeans
 
-from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import learning_curve
-from sklearn.model_selection import validation_curve
-from plot_learning_curve import plot_learning_curve
 from mpl_toolkits.mplot3d import Axes3D
 import scikitplot as skplt
 #from skplt.metrics.plot_confusion_matrix import plot_confusion_matrix
-import svm_code
+from Normal_classifier import svm_code
 import matplotlib as mpl
 
 mpl.use('Agg')
