@@ -14,8 +14,8 @@ from sklearn.model_selection import learning_curve
 from sklearn.model_selection import validation_curve
 from plot_learning_curve import plot_learning_curve
 from mpl_toolkits.mplot3d import Axes3D
-
-#from plot_confusion_matrix import plot_confusion_matrix
+import scikitplot as skplt
+#from skplt.metrics.plot_confusion_matrix import plot_confusion_matrix
 import svm_code
 import matplotlib as mpl
 
@@ -193,7 +193,8 @@ print("Accuracy : ", nn_accuracy)
 numpy.set_printoptions(precision=2)
 # Plot non-normalized confusion matrix
 plt.figure()
-#plot_confusion_matrix(nn_cnf, classes=class_names, title='Confusion matrix, without normalization')
+skplt.metrics.plot_confusion_matrix(nn_cnf, classes=class_names, title='Confusion matrix, without normalization')
+plt.show()
 plt.savefig("./images/nn_confusion_matrix.png")
 # Plot normalized confusion matrix
 plt.figure()
