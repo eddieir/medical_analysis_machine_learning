@@ -96,7 +96,7 @@ fig = plt.figure(figsize=(20, 20))
 columns = 4
 rows = 3
 
-for i in range(0, columns * rows):
+for i in range(1, columns*rows +1):
     ax = fig.add_subplot(rows, columns, i)
     if np.argmax(Y_train[i]) == 0:
         ax.title.set_text('Benign')
@@ -261,7 +261,7 @@ plt.title('ROC curve')
 plt.legend(loc='best')
 plt.show()
 # plt.savefig(ROC_PLOT_FILE, bbox_inches='tight')
-plt.close()
+#plt.close()
 
 i = 0
 prop_class = []
