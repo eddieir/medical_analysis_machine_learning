@@ -6,14 +6,14 @@ from sklearn.metrics import roc_curve
 import cv2
 from PIL import Image
 import numpy as np
-from keras import layers
-from keras.applications import ResNet50, MobileNet, DenseNet201, InceptionV3, NASNetLarge, InceptionResNetV2, \
+from tensorflow.keras import layers
+from tensorflow.keras.applications import ResNet50, MobileNet, DenseNet201, InceptionV3, NASNetLarge, InceptionResNetV2, \
     NASNetMobile
-from keras.callbacks import Callback, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import Callback, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from keras.utils.np_utils import to_categorical
-from keras.models import Sequential
-from keras.optimizers import Adam
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -21,7 +21,7 @@ from sklearn.metrics import cohen_kappa_score, accuracy_score
 import scipy
 from tqdm import tqdm
 import tensorflow as tf
-from keras import backend as K
+from tensorflow.python.keras import backend as K
 import gc
 from functools import partial
 from sklearn import metrics
@@ -103,21 +103,19 @@ for i in range(1, columns*rows +1):
     else:
         ax.title.set_text('Malignant')
     plt.imshow(x_train[i], interpolation='nearest')
-plt.show()
+#plt.show()
 
-# ------------- Data generator ------------
 BATCH_SIZE = 16
 
 # Using original generator
 train_generator = ImageDataGenerator(
-    zoom_range=2,  # set range for random zoom
-    rotation_range=90,
-    horizontal_flip=True,  # randomly flip images
-    vertical_flip=True,  # randomly flip images
-)
+        zoom_range=2,  # set range for random zoom
+        rotation_range = 90,
+        horizontal_flip=True,  # randomly flip images
+        vertical_flip=True,  # randomly flip images
+    )
 
 
-# ----------------- First Model - RESNET50 Model -------------------
 def build_model(backbone, lr=1e-4):
     model = Sequential()
     model.add(backbone)
@@ -134,16 +132,10 @@ def build_model(backbone, lr=1e-4):
 
     return model
 
-
 K.clear_session()
 gc.collect()
 
-resnet = DenseNet201(
-    weights='imagenet',
-    include_top=False,
-    input_shape=(224, 224, 3)
-)
-
+resnet = DenseNet201(weights='imagenet')
 model = build_model(resnet, lr=1e-4)
 model.summary()
 
